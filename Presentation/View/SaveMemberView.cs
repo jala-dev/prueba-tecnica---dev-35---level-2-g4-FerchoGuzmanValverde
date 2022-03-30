@@ -18,7 +18,7 @@ namespace Presentation.View
             Console.WriteLine("1. Ingrese codigo de nuevo socio: ");
             input.fields.Add("CodigoSocio", InputMemberCode());
             Console.WriteLine("2. Ingrese primer nombre del nuevo socio: ");
-            input.fields.Add("PrimerNombre", Console.ReadLine());
+            input.fields.Add("PrimerNombre", InputMemberName());
             Console.WriteLine("3. Ingrese segundo nombre del nuevo socio: ");
             input.fields.Add("SegundoNombre", Console.ReadLine());
             return input;
@@ -36,6 +36,19 @@ namespace Presentation.View
 
             return memberCode.ToString();
 
+        }
+
+        private string InputMemberName()
+        {
+            string memberName = Console.ReadLine();
+            while (memberName.Length < 4)
+            {
+                Console.WriteLine("El nombre de socio debe tener minimo 4 caractéres!!");
+                Console.WriteLine("2. Ingrese primer nombre del nuevo socio: ");
+                memberName = Console.ReadLine();
+            }
+
+            return memberName;
         }
     }
 }
