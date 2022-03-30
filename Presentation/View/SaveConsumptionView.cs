@@ -18,8 +18,21 @@ namespace Presentation.View
             Console.WriteLine("1. Ingrese el codigo del socio: ");
             input.fields.Add("CodigoSocio", Console.ReadLine());
             Console.WriteLine("2. Ingrese el valor del consumo: ");
-            input.fields.Add("Consumo", Console.ReadLine());
+            input.fields.Add("Consumo", InputConsumptionValue());
             return input;
+        }
+
+        private string InputConsumptionValue()
+        {
+            int consumptionValue = int.Parse(Console.ReadLine());
+            while (consumptionValue < 1)
+            {
+                Console.WriteLine("El consumo debe ser un valor positivo!!");
+                Console.WriteLine("2. Ingrese el valor del consumo: ");
+                consumptionValue = int.Parse(Console.ReadLine());
+            }
+
+            return consumptionValue.ToString();
         }
     }
 }
