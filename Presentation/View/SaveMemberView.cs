@@ -16,12 +16,26 @@ namespace Presentation.View
             InputData input = new InputData();
             Console.WriteLine("======================================");
             Console.WriteLine("1. Ingrese codigo de nuevo socio: ");
-            input.fields.Add("CodigoSocio", Console.ReadLine());
+            input.fields.Add("CodigoSocio", InputMemberCode());
             Console.WriteLine("2. Ingrese primer nombre del nuevo socio: ");
             input.fields.Add("PrimerNombre", Console.ReadLine());
             Console.WriteLine("3. Ingrese segundo nombre del nuevo socio: ");
             input.fields.Add("SegundoNombre", Console.ReadLine());
             return input;
+        }
+
+        private string InputMemberCode()
+        {
+            int memberCode = int.Parse(Console.ReadLine());
+            while(memberCode < 5000 || memberCode > 5999)
+            {
+                Console.WriteLine("Codigo de miembro debe ser un valor entre 5000 y 5999");
+                Console.WriteLine("1. Ingrese codigo de nuevo socio: ");
+                memberCode = int.Parse(Console.ReadLine());
+            }
+
+            return memberCode.ToString();
+
         }
     }
 }
