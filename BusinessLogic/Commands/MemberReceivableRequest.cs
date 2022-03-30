@@ -42,7 +42,10 @@ namespace BusinessLogic.Commands
             double total = 0;
             foreach(Consumption item in memberConsumptions)
             {
-                total += item.Value * WaterPrice;
+                if (item.Paid == false)
+                {
+                    total += item.Value * WaterPrice;
+                }
             }
             return total;
         }

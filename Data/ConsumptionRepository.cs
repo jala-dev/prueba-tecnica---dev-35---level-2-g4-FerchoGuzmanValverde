@@ -18,7 +18,10 @@ namespace Data
             {
                 if(item.MemberID == entity.ID)
                 {
-                    result.Add(item);
+                    if (item.Paid == false)
+                    {
+                        result.Add(item);
+                    }
                 }
             }
 
