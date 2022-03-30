@@ -28,5 +28,10 @@ namespace Data
 
             return null;
         }
+
+        public void SaveMember(Member newMember)
+        {
+            LocalMemoryDB.MembersContext.Add(newMember);
+        }
     }
 }
