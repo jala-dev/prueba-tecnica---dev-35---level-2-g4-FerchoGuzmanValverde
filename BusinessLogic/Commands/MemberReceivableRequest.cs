@@ -29,11 +29,12 @@ namespace BusinessLogic.Commands
 
             List<Consumption> memberConsumptions = new ConsumptionRepository().GetConsumptionByMember(entity);
 
-            double total = this.CalculateTotalReceivable(memberConsumptions);
-            string nombre = entity.FirstName + " " + entity.SecondName;
-            int cubos = consuptionRepositroy.GetConsumptionByMember(entity).Count;
+            int memberCode = entity.ID;
+            string memberName = entity.FirstName + " " + entity.SecondName;
+            int totalBuckets = consuptionRepositroy.GetConsumptionByMember(entity).Count;
+            double amountDebt = this.CalculateTotalReceivable(memberConsumptions);
 
-            view.ShowResult(nombre, cubos, total);
+            view.ShowResult(memberCode, memberName, totalBuckets, amountDebt);
         }
 
         private double CalculateTotalReceivable(List<Consumption> memberConsumptions)
