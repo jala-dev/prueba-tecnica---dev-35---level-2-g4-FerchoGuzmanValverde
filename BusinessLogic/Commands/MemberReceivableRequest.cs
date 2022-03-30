@@ -4,6 +4,7 @@ using Data.Entities;
 using Presentation;
 using Presentation.View;
 using System.Collections.Generic;
+using System;
 
 namespace BusinessLogic.Commands
 {
@@ -12,16 +13,27 @@ namespace BusinessLogic.Commands
         double WaterPrice = 8.5;
         public void Execute()
         {
+            MemberRepository memberRepository = new MemberRepository();
+            ConsumptionRepository consuptionRepositroy = new ConsumptionRepository();
             UserReceivableView view = new UserReceivableView();
             InputData data = view.RequestData();
             Member entity = new Member();
-            entity.ID = int.Parse(data.fields["CodigoSocio"]);
-            
+            if (memberRepository.GetMember(int.Parse(data.fields["CodigoSocio"])) != null)
+            {
+                entity = memberRepository.GetMember(int.Parse(data.fields["CodigoSocio"]));
+            }
+            else
+            {
+                entity.ID = int.Parse(data.fields["CodigoSocio"]);
+            }
+
             List<Consumption> memberConsumptions = new ConsumptionRepository().GetConsumptionByMember(entity);
 
             double total = this.CalculateTotalReceivable(memberConsumptions);
+            string nombre = entity.FirstName + " " + entity.SecondName;
+            int cubos = consuptionRepositroy.GetConsumptionByMember(entity).Count;
 
-            view.ShowResult(total);            
+            view.ShowResult(nombre, cubos, total);
         }
 
         private double CalculateTotalReceivable(List<Consumption> memberConsumptions)

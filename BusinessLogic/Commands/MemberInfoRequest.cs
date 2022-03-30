@@ -13,10 +13,16 @@ namespace BusinessLogic.Commands
             InputData data = view.RequestData();
             Member entity = new Member();
             entity.ID = int.Parse(data.fields["CodigoSocio"]);
-
             Member member = new MemberRepository().GetMember(entity.ID);
-            
-            view.ShowResult(member.FirstName + " " + member.SecondName);
+            if(member != null)
+            {
+                view.ShowResult(member.FirstName + " " + member.SecondName);
+            }
+            else
+            {
+                view.ShowResult("No existente!!");
+            }
+
         }
     }
 }
